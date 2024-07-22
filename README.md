@@ -13,6 +13,7 @@ UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作�
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 
 controller.java//削除実行処理
+
  ①✘splayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
         UserSearchRequest deleteRequest = new UserSearchRequest();
@@ -31,6 +32,7 @@ Q:サイトのコードのままで動く人と、動かない人がいる差が
 例えば、フォームが本来 POST メソッドしかサポートしていない場合でも、このフィルターを使用することで PUT や DELETE といった他の HTTP メソッドをエミュレートできます。
 
 controller.java//削除実行処理
+
     @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
     public String displayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
