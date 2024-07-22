@@ -119,14 +119,11 @@ userService.create(userAdd);//追加処理の実行をサービスクラスに�
     /*削除の実行
      *
      */
-    @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
-    public String displayDelete(@PathVariable("id") String id) {
-        // UserSearchRequest オブジェクトを作成
-        UserSearchRequest deleteRequest = new UserSearchRequest();
-        deleteRequest.setId(id); // ID を設定
+    @DeleteMapping(value = "user/delete/id={id}")//deleteボタンが押されたとき動く
+    public String displayDelete(@ModelAttribute UserSearchRequest delete) {
+        userService.deleteOne(delete); //postされたリクエストが格納されたdeleteを引数にdeleteOneメソッド呼び出し
+        return "delete";//delete.htmlを表示本来ならば、Thymeleafを使用しているので、「th:method = "delete"」で問題ないはず。
 
-        userService.deleteOne(deleteRequest); // UserSearchRequest を渡して削除処理を実行
-        return "delete"; // delete.html を表示
     }
 }
 
@@ -164,7 +161,8 @@ return "delete";
         userService.deleteOne(delete); //postされたリクエストが格納されたdeleteを引数にdeleteOneメソッド呼び出し
         return "delete";//delete.htmlを表示本来ならば、Thymeleafを使用しているので、「th:method = "delete"」で問題ないはず。
 
-      ↓修正
+      ↓★application.propertiesにspring.mvc.hiddenmethod.filter.enabled: trueを記述するとサンプルソースで動くので以下の編集文にしなくてヨシ
+
     @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
     public String displayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
