@@ -23,7 +23,10 @@ UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作�
 フォームメソッドの制約: ブラウザが DELETE メソッドをサポートしていないため、実際には POST メソッドでリクエストが送信される。
 この問題を解決するには、解決したコードのように、@RequestMappingを使って複数のHTTPメソッド（POST と DELETE）をサポートした。となります。
 Q:サイトのコードのままで動く人と、動かない人がいる差が何なのかなについては引き出しが足らず分かりかねます…🙇
-｜
+
+
+
+
 ★sampleソースで動くようにする解決は？"th:method delete" 405　「application.properties」に追加必要
 application.properties において spring.mvc.hiddenmethod.filter.enabled: true は、Spring MVC アプリケーションで隠しメソッドフィルターを有効にする設定です。
 この設定を有効にすると、HTML フォームから送信される隠しフィールド _method を使用して、HTTP メソッドをオーバーライドすることができます。
