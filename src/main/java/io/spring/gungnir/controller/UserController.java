@@ -164,7 +164,7 @@ return "delete";
         userService.deleteOne(delete); //postされたリクエストが格納されたdeleteを引数にdeleteOneメソッド呼び出し
         return "delete";//delete.htmlを表示本来ならば、Thymeleafを使用しているので、「th:method = "delete"」で問題ないはず。
 
-      ↓修正
+     ↓修正
     @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
     public String displayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
