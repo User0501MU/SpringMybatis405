@@ -14,17 +14,17 @@ UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作�
 
 controller.java//削除実行処理
 
- ①✘splayDelete(@PathVariable("id") String id) {
+ ①~~splayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
         UserSearchRequest deleteRequest = new UserSearchRequest();
-        deleteRequest.setId(id); // ID を設定
+        deleteRequest.setId(id); // ID を設定~~
         
 405HTTPメソッドの不一致: コントローラーメソッドが DELETE リクエスト専用であるため、POST リクエストを受け付けない。
 フォームメソッドの制約: ブラウザが DELETE メソッドをサポートしていないため、実際には POST メソッドでリクエストが送信される。
 この問題を解決するには、解決したコードのように、@RequestMappingを使って複数のHTTPメソッド（POST と DELETE）をサポートした。となります。
 
-Q:サイトのコードのままで動く人と、動かない人がいる差が何なのかなについては引き出しが足らず分かりかねます…🙇
-↑上記は本来の解決じゃない方法である、Thymeleafを使用しているので、「th:method = "delete"」で問題ないはず
+Q:サイトのコードのままで動く人と、動かない人がいる差が何なのかなについては引き出しが足らず分かりかねます…
+↑上記は本来の解決じゃない方法である、Thymeleafを使用しているので、「th:method = "delete"」で問題ないはず！
 "th:method delete" 405　「application.properties」に追加必要でした。
 
 ②★application.properties において spring.mvc.hiddenmethod.filter.enabled: true は、Spring MVC アプリケーションで隠しメソッドフィルターを有効にする設定です。
