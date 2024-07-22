@@ -116,8 +116,8 @@ userService.create(userAdd);//追加処理の実行をサービスクラスに�
         return "edit";//edit.htmlを表示
     }
 
-    /*
-     * 削除の実行
+    /*削除の実行
+     *
      */
     @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
     public String displayDelete(@PathVariable("id") String id) {
@@ -155,4 +155,21 @@ userService の deleteOne メソッドを呼び出して、さっきの deleteRe
 
 return "delete";
 処理が終わったら、delete.html ってテンプレートを返して、削除完了の画面を表示するんや。
-これで、関西弁での説明は終わりやで*/
+これで、関西弁での説明は終わりやで
+
+*
+*
+* @DeleteMapping(value = "user/delete/id={id}")//deleteボタンが押されたとき動く
+    public String displayDelete(@ModelAttribute UserSearchRequest delete) {
+        userService.deleteOne(delete); //postされたリクエストが格納されたdeleteを引数にdeleteOneメソッド呼び出し
+        return "delete";//delete.htmlを表示
+
+        ↓修正
+    @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
+    public String displayDelete(@PathVariable("id") String id) {
+        // UserSearchRequest オブジェクトを作成
+        UserSearchRequest deleteRequest = new UserSearchRequest();
+        deleteRequest.setId(id); // ID を設定
+
+        userService.deleteOne(deleteRequest); // UserSearchRequest を渡して削除処理を実行
+        return "delete"; // delete.html を表示/*/
