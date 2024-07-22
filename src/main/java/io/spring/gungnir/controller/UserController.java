@@ -116,13 +116,43 @@ userService.create(userAdd);//追加処理の実行をサービスクラスに�
         return "edit";//edit.htmlを表示
     }
 
-
-/*削除の実行
-     *
+    /*
+     * 削除の実行
      */
-    @DeleteMapping(value = "user/delete/id={id}")//deleteボタンが押されたとき動く
-    public String displayDelete(@ModelAttribute UserSearchRequest delete) {
-        userService.deleteOne(delete); //postされたリクエストが格納されたdeleteを引数にdeleteOneメソッド呼び出し
-        return "delete";//delete.htmlを表示
+    @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
+    public String displayDelete(@PathVariable("id") String id) {
+        // UserSearchRequest オブジェクトを作成
+        UserSearchRequest deleteRequest = new UserSearchRequest();
+        deleteRequest.setId(id); // ID を設定
+
+        userService.deleteOne(deleteRequest); // UserSearchRequest を渡して削除処理を実行
+        return "delete"; // delete.html を表示
     }
 }
+
+/*削除実行にpostが宣言されていなかった件
+ * @Controller
+
+これで、UserController クラスが Spring MVC のコントローラーやでって宣言してるんや。
+@Autowired
+
+これで、UserService のインスタンスを自動で注入するように指定してるんや。わざわざ new せんでも、Spring が用意してくれるんや。
+
+@RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
+ここで、/user/delete/id={id} って URL パターンに対して POST または DELETE メソッドが呼ばれたときに、このメソッドが動くって指定してるんや。
+
+public String displayDelete(@PathVariable("id") String id)
+このメソッドは、id パラメータを URL から取り出して、displayDelete メソッドの id 引数として使うんや。@PathVariable で URL の {id} を引っこ抜いてるんや。
+
+UserSearchRequest deleteRequest = new UserSearchRequest();
+UserSearchRequest の新しいオブジェクトを作ってるんや。このオブジェクトを使って、削除処理のためのリクエストを準備するんや。
+
+deleteRequest.setId(id);
+さっき作った deleteRequest オブジェクトに、URL から取り出した id をセットしてるんや。
+
+userService.deleteOne(deleteRequest);
+userService の deleteOne メソッドを呼び出して、さっきの deleteRequest を渡して削除処理を実行してるんや。
+
+return "delete";
+処理が終わったら、delete.html ってテンプレートを返して、削除完了の画面を表示するんや。
+これで、関西弁での説明は終わりやで！*/
