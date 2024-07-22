@@ -155,4 +155,4 @@ userService の deleteOne メソッドを呼び出して、さっきの deleteRe
 
 return "delete";
 処理が終わったら、delete.html ってテンプレートを返して、削除完了の画面を表示するんや。
-これで、関西弁での説明は終わりやで！*/
+これで、関西弁での説明は終わりやで*/
