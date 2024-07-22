@@ -12,10 +12,8 @@ UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作�
 @Insert("INSERT INTO symphogear_players(id,name,symphogear_name)" + "VALUES (#{id},#{name},#{symphogear_name})") void create(UserSearchRequest userAdd);
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 
-
-↓本来の解決じゃない方法：application.propertiesにspring.mvc.hiddenmethod.filter.enabled: trueを記述するとサンプルソースで動くので以下の編集文にしなくてヨシ
-
- ✘splayDelete(@PathVariable("id") String id) {
+controller.java//削除実行処理
+ ①✘splayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
         UserSearchRequest deleteRequest = new UserSearchRequest();
         deleteRequest.setId(id); // ID を設定
@@ -23,16 +21,16 @@ UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作�
 405HTTPメソッドの不一致: コントローラーメソッドが DELETE リクエスト専用であるため、POST リクエストを受け付けない。
 フォームメソッドの制約: ブラウザが DELETE メソッドをサポートしていないため、実際には POST メソッドでリクエストが送信される。
 この問題を解決するには、解決したコードのように、@RequestMappingを使って複数のHTTPメソッド（POST と DELETE）をサポートした。となります。
+
 Q:サイトのコードのままで動く人と、動かない人がいる差が何なのかなについては引き出しが足らず分かりかねます…🙇
+↑上記は本来の解決じゃない方法である、Thymeleafを使用しているので、「th:method = "delete"」で問題ないはず
+"th:method delete" 405　「application.properties」に追加必要でした。
 
-
-
-
-★sampleソースで動くようにする解決は？"th:method delete" 405　「application.properties」に追加必要
-application.properties において spring.mvc.hiddenmethod.filter.enabled: true は、Spring MVC アプリケーションで隠しメソッドフィルターを有効にする設定です。
+②★application.properties において spring.mvc.hiddenmethod.filter.enabled: true は、Spring MVC アプリケーションで隠しメソッドフィルターを有効にする設定です。
 この設定を有効にすると、HTML フォームから送信される隠しフィールド _method を使用して、HTTP メソッドをオーバーライドすることができます。
 例えば、フォームが本来 POST メソッドしかサポートしていない場合でも、このフィルターを使用することで PUT や DELETE といった他の HTTP メソッドをエミュレートできます。
 
+controller.java//削除実行処理
     @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
     public String displayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
