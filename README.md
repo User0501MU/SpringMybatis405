@@ -10,7 +10,8 @@ mysql -u root -p ・データーベース一覧表示 mysql> SHOW DATABASES;
 
 UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作成する必要がある
 @Insert("INSERT INTO symphogear_players(id,name,symphogear_name)" + "VALUES (#{id},#{name},#{symphogear_name})") void create(UserSearchRequest userAdd);
-＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+
+
 
 ```controller.java
 
