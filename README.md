@@ -1,4 +1,6 @@
-mysql -u root -p ・データーベース一覧表示 mysql> SHOW DATABASES;
+mysql -u root -p 
+
+・データーベース一覧表示 mysql> SHOW DATABASES;
 
 ・データーベース作成 mysql> CREATE DATABASE SpringMybatis;
 
