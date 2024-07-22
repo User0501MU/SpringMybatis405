@@ -10,7 +10,7 @@ mysql -u root -p ・データーベース一覧表示 mysql> SHOW DATABASES;
 
 UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作成する必要がある
 @Insert("INSERT INTO symphogear_players(id,name,symphogear_name)" + "VALUES (#{id},#{name},#{symphogear_name})") void create(UserSearchRequest userAdd);
-＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 
 
 ↓本来の解決じゃない方法：application.propertiesにspring.mvc.hiddenmethod.filter.enabled: trueを記述するとサンプルソースで動くので以下の編集文にしなくてヨシ
