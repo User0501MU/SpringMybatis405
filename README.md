@@ -12,13 +12,13 @@ UserMapper.javaの //★symphogear_playersがテーブルなのでそれを作�
 @Insert("INSERT INTO symphogear_players(id,name,symphogear_name)" + "VALUES (#{id},#{name},#{symphogear_name})") void create(UserSearchRequest userAdd);
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 
-controller.java//削除実行処理
+```controller.java
 
  ①~~splayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
         UserSearchRequest deleteRequest = new UserSearchRequest();
         deleteRequest.setId(id); // ID を設定~~
-        
+```
 405HTTPメソッドの不一致: コントローラーメソッドが DELETE リクエスト専用であるため、POST リクエストを受け付けない。
 フォームメソッドの制約: ブラウザが DELETE メソッドをサポートしていないため、実際には POST メソッドでリクエストが送信される。
 この問題を解決するには、解決したコードのように、@RequestMappingを使って複数のHTTPメソッド（POST と DELETE）をサポートした。となります。
@@ -31,10 +31,11 @@ Q:サイトのコードのままで動く人と、動かない人がいる差が
 この設定を有効にすると、HTML フォームから送信される隠しフィールド _method を使用して、HTTP メソッドをオーバーライドすることができます。
 例えば、フォームが本来 POST メソッドしかサポートしていない場合でも、このフィルターを使用することで PUT や DELETE といった他の HTTP メソッドをエミュレートできます。
 
-controller.java//削除実行処理
+```controller.java
 
     @RequestMapping(value = "/user/delete/id={id}", method = {RequestMethod.POST, RequestMethod.DELETE})
     public String displayDelete(@PathVariable("id") String id) {
         // UserSearchRequest オブジェクトを作成
         UserSearchRequest deleteRequest = new UserSearchRequest();
         deleteRequest.setId(id); // ID を設定
+```
