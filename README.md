@@ -1,4 +1,3 @@
-※mybatis使わないDB接続JDBC
 
 mysql -u root -p 
 
