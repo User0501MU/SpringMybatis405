@@ -1,3 +1,5 @@
+※mybatis使わないDB接続JDBC
+
 mysql -u root -p 
 
 ・データーベース一覧表示 mysql> SHOW DATABASES;
